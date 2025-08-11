@@ -1,0 +1,8 @@
+Globalni shart bu qushilishi kerak bulgan functionlar xozirgi logika va ishlash jihatlarini buzib yuborishi kerak emas yani offline, va hakazolarni. Yana bir narsa keyinchalik boshqa bulimlar xam qushilishi mumkin yani kundalikni reja qilish bir kunni rejalashtirish, tibbiy yordam, sos, vahakazolar shunday bulimlarni keyinchalik qushsa buladigan qilib logikalar yozish kerak dynamic qilib.
+1. Xato malumot kiritib quygan paytga update lar xam qushilishi kerak.
+2. Kategoryalar xam globalni ishlatiladiganlari yana qushish kerak yani kupaytirish kerak.
+3. Saqlangandan keyin get bulganda sungi tranzaksiyalarda aniq vaqt xam chiqadigan qilish kerak. Masalan: 10:15 shunga uxshash.
+4. Kategorylar buyicha xarajatlar bor lekin daromadlar yuq shuni xam qushish kerak yani Kategoryalar buyicha daromadlar deb.
+5. Agar oliji bulsa patpiska xizmatini xam qilish kerak yani nechta odam bundan foydalanyabdi shuni qilish imkoni bulsa bu functionni xam qushish kerak va padpiskalar deb uni xam dashboardda kursatish kerak.
+6. Filterlar buyicha xam ishlash kerak yani "all, yil, oy, hafta, kun" buyicha tab day qilib malumotlarni filterda xam kursatish kerak.
+7. Profile bulimi xam qilish kerak va uni ixtiyoriy malumot tuldiradigan form qilish kerak, agar formni tuldirib saqlasa bitta va interniti ishlagan payt bir marta telegram botga malumotlarini yuborishi kerak yni bitta user uchun faqat bir marta ishlasin telegramga junatish uchun telegram send apidan foydalanilsin chat id orqali faqat menga xabar kelsin, yani Profilega malumot tuldirsayu lekin interneti yuq bulib ketmasa false xolatda bulsin va interneti ishlagandan true bulib method boshqa ishlamasin.

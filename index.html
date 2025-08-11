@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Personal finance manager with offline support"
+    />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#4f46e5" />
+    <title>SmartBudget - Shaxsiy Moliya Boshqaruvi</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((registration) => {
+              console.log(
+                "✅ Service Worker registered successfully:",
+                registration.scope
+              );
+
+              // Check for updates
+              registration.addEventListener("updatefound", () => {
+                const newWorker = registration.installing;
+                newWorker.addEventListener("statechange", () => {
+                  if (
+                    newWorker.state === "installed" &&
+                    navigator.serviceWorker.controller
+                  ) {
+                    console.log("🔄 New content available, please refresh.");
+                    // You can show a notification to user here
+                  }
+                });
+              });
+            })
+            .catch((registrationError) => {
+              console.error(
+                "❌ Service Worker registration failed:",
+                registrationError
+              );
+            });
+        });
+      } else {
+        console.log("❌ Service Worker not supported");
+      }
+
+      // Add to home screen prompt
+      let deferredPrompt;
+      window.addEventListener("beforeinstallprompt", (e) => {
+        console.log("💡 Install prompt available");
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Show install button or banner
+        const installButton = document.createElement("button");
+        installButton.textContent = "Ilovani o'rnatish";
+        installButton.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 25px;
+          font-weight: 600;
+          cursor: pointer;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+          z-index: 1000;
+          font-size: 14px;
+        `;
+
+        installButton.addEventListener("click", async () => {
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response: ${outcome}`);
+            deferredPrompt = null;
+            installButton.remove();
+          }
+        });
+
+        document.body.appendChild(installButton);
+
+        // Auto hide after 10 seconds
+        setTimeout(() => {
+          if (installButton.parentNode) {
+            installButton.remove();
+          }
+        }, 10000);
+      });
+
+      // Handle successful installation
+      window.addEventListener("appinstalled", (evt) => {
+        console.log("🎉 App successfully installed");
+      });
+    </script>
+  </body>
+</html>
