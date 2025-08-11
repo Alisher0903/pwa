@@ -1,11 +1,12 @@
 import React from "react";
-import { Trash2, Calendar, Tag } from "lucide-react";
+import { Trash2, Calendar, Tag, Edit } from "lucide-react";
 import { Transaction, Category } from "../types";
 
 interface TransactionListProps {
   transactions: Transaction[];
   categories: Category[];
   onDelete: (id: string) => void;
+  onEdit: (transaction: Transaction) => void;
   darkMode: boolean;
 }
 
@@ -13,6 +14,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
   transactions,
   categories,
   onDelete,
+  onEdit,
   darkMode,
 }) => {
   const getCategoryIcon = (categoryName: string) => {
@@ -108,7 +110,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                           darkMode ? "text-gray-400" : "text-gray-500"
                         }`}
                       >
-                        {new Date(transaction.date).toLocaleDateString("uz-UZ")}
+                        {new Date(transaction.date).toLocaleDateString("uz-UZ")} {new Date(transaction.createdAt).toLocaleTimeString("uz-UZ", { hour: '2-digit', minute: '2-digit' })}
                       </span>
                     </div>
                   </div>
@@ -136,16 +138,28 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                   </p>
                 </div>
 
-                <button
-                  onClick={() => onDelete(transaction.id)}
-                  className={`p-1.5 sm:p-2 rounded-lg transition-colors flex-shrink-0 ${
-                    darkMode
-                      ? "hover:bg-red-500/20 text-gray-400 hover:text-red-400"
-                      : "hover:bg-red-50 text-gray-500 hover:text-red-600"
-                  }`}
-                >
-                  <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                </button>
+                <div className="flex space-x-1">
+                  <button
+                    onClick={() => onEdit(transaction)}
+                    className={`p-1.5 sm:p-2 rounded-lg transition-colors flex-shrink-0 ${
+                      darkMode
+                        ? "hover:bg-blue-500/20 text-gray-400 hover:text-blue-400"
+                        : "hover:bg-blue-50 text-gray-500 hover:text-blue-600"
+                    }`}
+                  >
+                    <Edit className="w-3 h-3 sm:w-4 sm:h-4" />
+                  </button>
+                  <button
+                    onClick={() => onDelete(transaction.id)}
+                    className={`p-1.5 sm:p-2 rounded-lg transition-colors flex-shrink-0 ${
+                      darkMode
+                        ? "hover:bg-red-500/20 text-gray-400 hover:text-red-400"
+                        : "hover:bg-red-50 text-gray-500 hover:text-red-600"
+                    }`}
+                  >
+                    <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

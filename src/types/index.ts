@@ -29,5 +29,30 @@ export interface Stats {
   totalExpenses: number;
   balance: number;
   categoryStats: Record<string, number>;
+  categoryIncomeStats: Record<string, number>;
   monthlyStats: Record<string, { income: number; expenses: number }>;
+}
+
+export interface Profile {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  telegramSent: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FilterPeriod {
+  type: 'all' | 'day' | 'week' | 'month' | 'year';
+  value?: string;
+}
+
+export interface AppModule {
+  id: string;
+  name: string;
+  icon: string;
+  route: string;
+  enabled: boolean;
+  comingSoon?: boolean;
 }

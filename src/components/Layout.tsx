@@ -1,11 +1,12 @@
 import React from "react";
-import { Moon, Sun, Download, Wallet } from "lucide-react";
+import { Moon, Sun, Download, Wallet, User } from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
   darkMode: boolean;
   toggleDarkMode: () => void;
   onExport: () => void;
+  onProfileClick: () => void;
 }
 
 export const Layout: React.FC<LayoutProps> = ({
@@ -13,6 +14,7 @@ export const Layout: React.FC<LayoutProps> = ({
   darkMode,
   toggleDarkMode,
   onExport,
+  onProfileClick,
 }) => {
   return (
     <div
@@ -55,6 +57,18 @@ export const Layout: React.FC<LayoutProps> = ({
             </div>
 
             <div className="flex items-center space-x-4">
+              <button
+                onClick={onProfileClick}
+                className={`flex justify-center items-center p-2 rounded-lg transition-all hover:scale-105 ${
+                  darkMode
+                    ? "bg-gray-700 hover:bg-gray-600 text-gray-300"
+                    : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                }`}
+                title="Profil"
+              >
+                <User className="w-5 h-5" />
+              </button>
+
               <button
                 onClick={onExport}
                 className={`flex justify-center items-center p-2 rounded-lg transition-all hover:scale-105 ${

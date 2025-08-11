@@ -1,4 +1,4 @@
-import { Transaction, Category, Budget } from "../types";
+import { Transaction, Category, Budget, Profile } from "../types";
 
 const DB_NAME = "SmartBudgetDB";
 const DB_VERSION = 1;
@@ -32,6 +32,10 @@ class StorageManager {
 
         if (!db.objectStoreNames.contains("budgets")) {
           db.createObjectStore("budgets", { keyPath: "id" });
+        }
+
+        if (!db.objectStoreNames.contains("profiles")) {
+          db.createObjectStore("profiles", { keyPath: "id" });
         }
       };
     });
@@ -88,6 +92,34 @@ class StorageManager {
         color: "#8b5cf6",
         type: "expense",
       },
+      {
+        id: "12",
+        name: "Kiyim-kechak",
+        icon: "👕",
+        color: "#f97316",
+        type: "expense",
+      },
+      {
+        id: "13",
+        name: "Texnologiya",
+        icon: "📱",
+        color: "#06b6d4",
+        type: "expense",
+      },
+      {
+        id: "14",
+        name: "Sport",
+        icon: "⚽",
+        color: "#84cc16",
+        type: "expense",
+      },
+      {
+        id: "15",
+        name: "Sayohat",
+        icon: "✈️",
+        color: "#f59e0b",
+        type: "expense",
+      },
       { id: "7", name: "Maosh", icon: "💰", color: "#059669", type: "income" },
       {
         id: "8",
@@ -108,6 +140,27 @@ class StorageManager {
         name: "Sovg'a",
         icon: "🎁",
         color: "#dc2626",
+        type: "income",
+      },
+      {
+        id: "16",
+        name: "Biznes",
+        icon: "🏢",
+        color: "#0d9488",
+        type: "income",
+      },
+      {
+        id: "17",
+        name: "Qo'shimcha ish",
+        icon: "💼",
+        color: "#7c2d12",
+        type: "income",
+      },
+      {
+        id: "18",
+        name: "Ijara daromadi",
+        icon: "🏠",
+        color: "#166534",
         type: "income",
       },
     ];
@@ -193,6 +246,47 @@ class StorageManager {
     });
   }
 
+  async updateTransaction(transaction: Transaction): Promise<void> {
+    if (!this.db) return;
+
+    return new Promise((resolve, reject) => {
+      const dbTransaction = this.db!.transaction(["transactions"], "readwrite");
+      const store = dbTransaction.objectStore("transactions");
+      const request = store.put(transaction);
+
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async getProfile(): Promise<Profile | null> {
+    if (!this.db) return null;
+
+    return new Promise((resolve, reject) => {
+      const transaction = this.db!.transaction(["profiles"], "readonly");
+      const store = transaction.objectStore("profiles");
+      const request = store.getAll();
+
+      request.onsuccess = () => {
+        const profiles = request.result;
+        resolve(profiles.length > 0 ? profiles[0] : null);
+      };
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async saveProfile(profile: Profile): Promise<void> {
+    if (!this.db) return;
+
+    return new Promise((resolve, reject) => {
+      const transaction = this.db!.transaction(["profiles"], "readwrite");
+      const store = transaction.objectStore("profiles");
+      const request = store.put(profile);
+
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(request.error);
+    });
+  }
   exportData(): Promise<string> {
     return new Promise(async (resolve) => {
       const transactions = await this.getTransactions();

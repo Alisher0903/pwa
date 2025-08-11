@@ -4,20 +4,33 @@ import { StatsCards } from "./components/StatsCards";
 import { TransactionForm } from "./components/TransactionForm";
 import { TransactionList } from "./components/TransactionList";
 import { CategoryChart } from "./components/CategoryChart";
+import { CategoryIncomeChart } from "./components/CategoryIncomeChart";
+import { FilterTabs } from "./components/FilterTabs";
+import { ProfileModal } from "./components/ProfileModal";
+import { EditTransactionModal } from "./components/EditTransactionModal";
+import { ModuleGrid } from "./components/ModuleGrid";
 import { useFinance } from "./hooks/useFinance";
+import { Transaction } from "./types";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
     const saved = localStorage.getItem("darkMode");
     return saved ? JSON.parse(saved) : false;
   });
+  const [showProfile, setShowProfile] = useState(false);
+  const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
 
   const {
     transactions,
     categories,
+    profile,
+    filter,
     loading,
     addTransaction,
+    updateTransaction,
     deleteTransaction,
+    saveProfile,
+    setFilter,
     getStats,
     exportData,
   } = useFinance();
@@ -65,16 +78,26 @@ function App() {
       darkMode={darkMode}
       toggleDarkMode={() => setDarkMode(!darkMode)}
       onExport={handleExport}
+      onProfileClick={() => setShowProfile(true)}
     >
       <div className="space-y-8">
+        <ModuleGrid darkMode={darkMode} />
+        
+        <FilterTabs 
+          filter={filter}
+          onFilterChange={setFilter}
+          darkMode={darkMode}
+        />
+        
         <StatsCards stats={stats} darkMode={darkMode} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+          <div>
             <TransactionList
               transactions={transactions}
               categories={categories}
               onDelete={deleteTransaction}
+              onEdit={setEditingTransaction}
               darkMode={darkMode}
             />
           </div>
@@ -87,11 +110,38 @@ function App() {
             />
           </div>
         </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+          <div>
+            <CategoryIncomeChart
+              stats={stats}
+              categories={categories}
+              darkMode={darkMode}
+            />
+          </div>
+        </div>
       </div>
 
       <TransactionForm
         categories={categories}
         onAdd={addTransaction}
+        darkMode={darkMode}
+      />
+      
+      <ProfileModal
+        isOpen={showProfile}
+        onClose={() => setShowProfile(false)}
+        profile={profile}
+        onSave={saveProfile}
+        darkMode={darkMode}
+      />
+      
+      <EditTransactionModal
+        isOpen={!!editingTransaction}
+        onClose={() => setEditingTransaction(null)}
+        transaction={editingTransaction}
+        categories={categories}
+        onUpdate={updateTransaction}
         darkMode={darkMode}
       />
     </Layout>
