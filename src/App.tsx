@@ -18,7 +18,8 @@ function App() {
     return saved ? JSON.parse(saved) : false;
   });
   const [showProfile, setShowProfile] = useState(false);
-  const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
+  const [editingTransaction, setEditingTransaction] =
+    useState<Transaction | null>(null);
 
   const {
     transactions,
@@ -82,13 +83,13 @@ function App() {
     >
       <div className="space-y-8">
         <ModuleGrid darkMode={darkMode} />
-        
-        <FilterTabs 
+
+        <FilterTabs
           filter={filter}
           onFilterChange={setFilter}
           darkMode={darkMode}
         />
-        
+
         <StatsCards stats={stats} darkMode={darkMode} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
@@ -110,7 +111,7 @@ function App() {
             />
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           <div>
             <CategoryIncomeChart
@@ -127,7 +128,7 @@ function App() {
         onAdd={addTransaction}
         darkMode={darkMode}
       />
-      
+
       <ProfileModal
         isOpen={showProfile}
         onClose={() => setShowProfile(false)}
@@ -135,7 +136,7 @@ function App() {
         onSave={saveProfile}
         darkMode={darkMode}
       />
-      
+
       <EditTransactionModal
         isOpen={!!editingTransaction}
         onClose={() => setEditingTransaction(null)}

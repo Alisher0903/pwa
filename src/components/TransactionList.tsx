@@ -110,7 +110,11 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                           darkMode ? "text-gray-400" : "text-gray-500"
                         }`}
                       >
-                        {new Date(transaction.date).toLocaleDateString("uz-UZ")} {new Date(transaction.createdAt).toLocaleTimeString("uz-UZ", { hour: '2-digit', minute: '2-digit' })}
+                        {new Date(transaction.date).toLocaleDateString("uz-UZ")}{" "}
+                        {new Date(transaction.createdAt).toLocaleTimeString(
+                          "uz-UZ",
+                          { hour: "2-digit", minute: "2-digit" }
+                        )}
                       </span>
                     </div>
                   </div>

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { X, User, Mail, Phone, Send } from 'lucide-react';
-import { Profile } from '../types';
+import React, { useState, useEffect } from "react";
+import { X, User, Mail, Phone, Send } from "lucide-react";
+import { Profile } from "../types";
 
 interface ProfileModalProps {
   isOpen: boolean;
   onClose: () => void;
   profile: Profile | null;
-  onSave: (profile: Omit<Profile, 'id' | 'createdAt' | 'updatedAt'>) => void;
+  onSave: (profile: Omit<Profile, "id" | "createdAt" | "updatedAt">) => void;
   darkMode: boolean;
 }
 
@@ -17,9 +17,9 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
   onSave,
   darkMode,
 }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   useEffect(() => {
     if (profile) {
@@ -47,21 +47,25 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div className={`max-w-md w-full p-6 rounded-2xl border transition-all ${
-        darkMode 
-          ? 'bg-gray-800 border-gray-700' 
-          : 'bg-white border-gray-200'
-      }`}>
+      <div
+        className={`max-w-md w-full p-6 rounded-2xl border transition-all ${
+          darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-200"
+        }`}
+      >
         <div className="flex justify-between items-center mb-6">
-          <h2 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+          <h2
+            className={`text-xl font-bold ${
+              darkMode ? "text-white" : "text-gray-900"
+            }`}
+          >
             Profil Ma'lumotlari
           </h2>
           <button
             onClick={onClose}
             className={`p-2 rounded-lg transition-colors ${
-              darkMode 
-                ? 'hover:bg-gray-700 text-gray-400' 
-                : 'hover:bg-gray-100 text-gray-600'
+              darkMode
+                ? "hover:bg-gray-700 text-gray-400"
+                : "hover:bg-gray-100 text-gray-600"
             }`}
           >
             <X className="w-5 h-5" />
@@ -70,9 +74,11 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className={`block text-sm font-medium mb-2 ${
-              darkMode ? 'text-gray-300' : 'text-gray-700'
-            }`}>
+            <label
+              className={`block text-sm font-medium mb-2 ${
+                darkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
               <User className="w-4 h-4 inline mr-2" />
               To'liq ism
             </label>
@@ -82,8 +88,8 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               onChange={(e) => setName(e.target.value)}
               className={`w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 darkMode
-                  ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
-                  : 'bg-white border-gray-300 text-gray-900'
+                  ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                  : "bg-white border-gray-300 text-gray-900"
               }`}
               placeholder="Ismingizni kiriting"
               required
@@ -91,9 +97,11 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
           </div>
 
           <div>
-            <label className={`block text-sm font-medium mb-2 ${
-              darkMode ? 'text-gray-300' : 'text-gray-700'
-            }`}>
+            <label
+              className={`block text-sm font-medium mb-2 ${
+                darkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
               <Mail className="w-4 h-4 inline mr-2" />
               Email manzil
             </label>
@@ -103,8 +111,8 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               onChange={(e) => setEmail(e.target.value)}
               className={`w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 darkMode
-                  ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
-                  : 'bg-white border-gray-300 text-gray-900'
+                  ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                  : "bg-white border-gray-300 text-gray-900"
               }`}
               placeholder="email@example.com"
               required
@@ -112,9 +120,11 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
           </div>
 
           <div>
-            <label className={`block text-sm font-medium mb-2 ${
-              darkMode ? 'text-gray-300' : 'text-gray-700'
-            }`}>
+            <label
+              className={`block text-sm font-medium mb-2 ${
+                darkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
               <Phone className="w-4 h-4 inline mr-2" />
               Telefon raqam
             </label>
@@ -124,8 +134,8 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               onChange={(e) => setPhone(e.target.value)}
               className={`w-full px-4 py-3 rounded-lg border transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                 darkMode
-                  ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
-                  : 'bg-white border-gray-300 text-gray-900'
+                  ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                  : "bg-white border-gray-300 text-gray-900"
               }`}
               placeholder="+998 90 123 45 67"
               required
@@ -133,11 +143,17 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
           </div>
 
           {profile?.telegramSent && (
-            <div className={`p-3 rounded-lg flex items-center space-x-2 ${
-              darkMode ? 'bg-green-500/20 text-green-400' : 'bg-green-50 text-green-600'
-            }`}>
+            <div
+              className={`p-3 rounded-lg flex items-center space-x-2 ${
+                darkMode
+                  ? "bg-green-500/20 text-green-400"
+                  : "bg-green-50 text-green-600"
+              }`}
+            >
               <Send className="w-4 h-4" />
-              <span className="text-sm">Ma'lumotlar Telegramga yuborildi ✓</span>
+              <span className="text-sm">
+                Ma'lumotlar saqlandi ✓
+              </span>
             </div>
           )}
 

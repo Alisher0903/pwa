@@ -1,6 +1,6 @@
 export interface Transaction {
   id: string;
-  type: 'income' | 'expense';
+  type: "income" | "expense";
   amount: number;
   category: string;
   description: string;
@@ -13,14 +13,14 @@ export interface Category {
   name: string;
   icon: string;
   color: string;
-  type: 'income' | 'expense';
+  type: "income" | "expense";
 }
 
 export interface Budget {
   id: string;
   category: string;
   amount: number;
-  period: 'weekly' | 'monthly';
+  period: "weekly" | "monthly";
   createdAt: string;
 }
 
@@ -44,7 +44,7 @@ export interface Profile {
 }
 
 export interface FilterPeriod {
-  type: 'all' | 'day' | 'week' | 'month' | 'year';
+  type: "all" | "day" | "week" | "month" | "year";
   value?: string;
 }
 

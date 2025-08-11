@@ -38,7 +38,16 @@ export const Layout: React.FC<LayoutProps> = ({
               <div className="p-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl">
                 <Wallet className="w-6 h-6 text-white" />
               </div>
-              <div>
+              <div className="md:hidden">
+                <h1
+                  className={`text-xl font-bold transition-colors ${
+                    darkMode ? "text-white" : "text-gray-900"
+                  }`}
+                >
+                  SH.M.B
+                </h1>
+              </div>
+              <div className="hidden md:inline">
                 <h1
                   className={`text-xl font-bold transition-colors ${
                     darkMode ? "text-white" : "text-gray-900"
