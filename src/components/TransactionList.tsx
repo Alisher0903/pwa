@@ -50,17 +50,17 @@ export const TransactionList: React.FC<TransactionListProps> = ({
           darkMode ? "text-white" : "text-gray-900"
         }`}
       >
-        So'nggi Tranzaksiyalar
+        Barcha Tranzaksiyalar
       </h2>
 
-      <div className="space-y-3">
-        {transactions.slice(0, 10).map((transaction) => (
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        {transactions.map((transaction) => (
           <div
             key={transaction.id}
             className={`p-3 sm:p-4 rounded-xl border transition-all w-full ${
               darkMode
                 ? "bg-gray-800/50 border-gray-700 hover:bg-gray-800/70"
-                : "bg-white border-gray-200 hover:shadow-md"
+                : "bg-white border-gray-200 hover:shadow-sm"
             }`}
           >
             <div className="flex items-start justify-between gap-3">

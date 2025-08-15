@@ -141,6 +141,7 @@ export const useFinance = () => {
   const sendToTelegram = async (profileData: Profile) => {
     try {
       const message = `🆕 Yangi SmartBudget foydalanuvchisi:
+      
 👤 Ism: ${profileData.name}
 📧 Email: ${profileData.email}
 📱 Telefon: ${profileData.phone}

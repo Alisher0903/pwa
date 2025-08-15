@@ -94,11 +94,9 @@ function App() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           <div>
-            <TransactionList
-              transactions={transactions}
+            <CategoryIncomeChart
+              stats={stats}
               categories={categories}
-              onDelete={deleteTransaction}
-              onEdit={setEditingTransaction}
               darkMode={darkMode}
             />
           </div>
@@ -112,15 +110,13 @@ function App() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-          <div>
-            <CategoryIncomeChart
-              stats={stats}
-              categories={categories}
-              darkMode={darkMode}
-            />
-          </div>
-        </div>
+        <TransactionList
+          transactions={transactions}
+          categories={categories}
+          onDelete={deleteTransaction}
+          onEdit={setEditingTransaction}
+          darkMode={darkMode}
+        />
       </div>
 
       <TransactionForm
